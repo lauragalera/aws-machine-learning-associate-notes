@@ -1,0 +1,369 @@
+# Amazon Comprehend
+
+Uses Natural Language Processing to identify the semantics, insights, and features within a document. It can recognize entities, subjects, language (ex. Filipino), sentiments, or common topics within a written text.
+
+While Amazon Comprehend isn’t directly related to infrastructure deployment, it is crucial for NLP workflows prior to deployment.
+
+Remember that Amazon Comprehend analyzes the following types of insights:
+
+- **Entities** - Serves as the identifier of a particular topic in a document.  
+- **Key Phrases** - Phrases that are frequently occurring, or at least exist within a documentation.  
+- **Personally Identifiable Information** - Comprehend can detect potential data that can be identified as sensitive or personal information.  
+- **Language** - It can detect language, for example, Filipino.  
+- **Sentiment** - The set of dominant emotions that can be felt in a document  
+- **Targeted Sentiment** - The feelings associated with the specific context within a document. It can be good, bad, neutral, or combined.  
+- **Syntax** - Parts of declamation for every word document.
+
+# Amazon Elastic Container Registry (Amazon ECR)
+
+Amazon ECR (Elastic Container Registry) serves as a way to store and manage Docker Images on AWS. For those who don’t know, a Docker image is a read-only template for re-creating Docker containers, which includes the sufficing code, libraries, and dependencies to run software within a container.
+
+Hence, in ECR, you can store and version your Docker images for custom ML models and automation jobs. This is usually used with SageMaker training or inference jobs. Furthermore, it is integrated with ECS (Elastic Container Service), backed by Amazon S3.
+
+**Sample Scenario:**  
+A developer using Amazon ECR repositories (Development, Staging, and Production), to separate the flow of container images within the deployment pipelines, and it is encompassed with security layers to preserve the security and integrity.
+
+# Amazon FSx for Lustre
+
+Is a fully managed file storage solution that excels at high-speed tasks plus processes that manage huge datasets as efficiently as possible. A top parallel file distributed system called Lustre (Linux + Cluster) forms its base, which really fits the needs of high-performance computing (HPC), Machine Learning (ML), and Big data tasks.
+
+It can scale up to 100 Gbps throughput to individual client instances, higher IOPS, and sub-ms disk latencies.
+
+**Storage Options:**
+
+- **SSD** - Amazon FSx for Lustre offers SSD storage for rapid response for busy workload tasks plus fast processing of small random files  
+- **HDD** - Amazon FSx for Lustre offers HDD storage, which serves high-volume data tasks and handles large sequential files
+
+**Easy Data Repository Integration with Amazon S3**  
+Amazon FSx for Lustre can link with Amazon S3 and lets you process data in the cloud with Lustre's high-performance file system. Once you connect it to an S3 bucket, FSx for Lustre shows S3 objects as files for easy access.
+
+The system lets you write data back to S3 along with repository tasks that help move data as well as metadata between FSx for Lustre and S3.
+
+Can be used for Lustre and on-premise data repositories.
+
+Data processing workloads from on-premises to AWS cloud infrastructure can be done using Amazon FSx for Lustre and AWS DirectConnect.
+
+**Multiple Deployment Options for FSX for Lustre**
+
+- **Scratch File System**  
+  ○ A temporary storage and shorter-term option for data processing.  
+  ○ Offers high burst throughput up to six times the baseline throughput of 200 MBps per TiB.  
+  ○ Use for cost-optimized storage for short-term processing.
+
+- **Persistent File System**  
+  ○ Designed for long-term storage workloads  
+  ○ Availability Zones can replicate this file system.  
+  ○ Monitors frequent file system errors or hardware failures.  
+  ○ Use this for long-term and sensitivity to potential operational disruptions.
+
+# Amazon Lex (From Amazon Lex V1)
+
+Amazon Lex is a service typically used for developing conversational user interfaces. It may include chatbots, virtual assistants, and using voice and text. It enables developers to create applications that can interpret both voice and text and are capable of interacting naturally.
+
+**Core Features of Amazon Lex:**
+
+- **Automatic Speech Recognition (ASR)** – Converts speech into text, enabling speech-based interactions.  
+- **Natural Language Understanding (NLU)** – Interprets the content being addressed by a human and responds in a conversational manner.  
+- **Multi-Turn Conversations** – Supports complex interactions consisting of multiple inputs before reaching a conclusion.  
+- **Integration with AWS Services** – Can be integrated with Lambda, S3, CloudWatch, etc.  
+- **Context Management** – Handles contextual awareness within conversations.  
+- **Omni-Channel Support** – Can be integrated into platforms like Slack.
+
+**Common Concepts in Amazon Lex:**
+
+- **Bot** – Automates tasks and can converse in natural language.  
+- **Intent** – Represents a goal or task the user wants to perform (e.g., "OrderCoffee").  
+- **Slot** – Parameters that the intent may require to fulfill.  
+- **Slot Types** – Data types for slots, either predefined or custom.
+
+# Amazon S3 Event Notifications
+
+Amazon S3 Event Notifications allow your S3 bucket to trigger actions automatically when events like object uploads or deletions occur.
+
+These events can send notifications to:
+
+- **Lambda Functions**
+- **Amazon SQS**
+- **Amazon SNS**
+
+This can be used to create reactive workflows in your architecture.
+
+**Common Event Types (API Operations for S3):**
+
+- `s3:ObjectCreated:Put`  
+- `s3:ObjectCreated:Post`  
+- `s3:ObjectCreated:Copy`  
+- `s3:ObjectCreated:*` – Matches all object creation operations
+
+# Amazon S3 Event Notifications with EventBridge
+
+This setup expands traditional event notifications by integrating them with **Amazon EventBridge**, a serverless event bus that builds powerful event-driven systems.
+
+**How It Works:**
+
+1. **S3 Event Generation** – Object uploads, deletions, ACL changes, etc., are captured.
+2. **Integration with Amazon EventBridge** – S3 sends these events directly to EventBridge.
+3. **Event Routing** – Rules in EventBridge determine how and where to forward events.
+4. **Advanced Filtering** – Supports more detailed event filtering and complex workflows.
+5. **Cross-Account and Multi-Region Support** – Centralizes events across AWS environments.
+
+**AWS Service Integration:**  
+S3 + EventBridge → Lambda / Step Functions / SNS / SQS
+
+**Steps to Use:**
+
+- Configure S3 to send events to EventBridge  
+- Set up rules in EventBridge  
+- Choose appropriate targets (Lambda, SNS, etc.)  
+- Apply least-privilege permissions
+
+# AWS CodeArtifact
+
+AWS CodeArtifact is a **fully managed repository service** that stores and manages software packages and dependencies. It is essential for ML engineers and developers who want to streamline version control, dependency management, and environment consistency across their ML workflows.
+
+## Key Features and Functions
+
+### Centralized Dependency Management
+- Supports formats: **PyPI**, **npm**, **Maven**, **NuGet**, **Conda**
+- Enables reuse of standard libraries across ML models
+- Promotes consistency across local, SageMaker, and CI/CD environments
+
+### Version Control
+- Tracks **exact package versions**
+- Prevents "dependency hell" due to version conflicts
+- Ensures repeatable training and evaluation
+
+### CI/CD Workflow Integration
+- Works with:
+  - **AWS CodePipeline**
+  - **AWS CodeBuild**
+  - **AWS CodeDeploy**
+- Speeds up ML development with automated and reproducible pipelines
+
+### Access Control and Security
+- Fine-grained **IAM permissions**
+- Full **encryption in transit and at rest**
+
+### Cross-Account and Multi-Region Access
+- Share packages across multiple AWS accounts and regions
+- Supports **distributed ML teams** and large organizations
+
+### Caching and Performance Optimization
+- **Local cache** for frequently used packages
+- Faster model training and deployment
+
+# AWS CodeBuild
+
+AWS CodeBuild is a **fully managed continuous integration (CI) service** that compiles source code, runs tests, and produces deployable artifacts. It is especially powerful for ML tasks involving automation, testing, training orchestration, and packaging in CI/CD pipelines.
+
+## Key Features and Functions
+
+### Automated Build and Testing
+- Compiles Python ML scripts
+- Runs unit tests, integration tests, and data validation
+- Ensures high code quality
+
+### Integration with Amazon SageMaker
+- Triggers model **training, evaluation, and deployment**
+- Supports **custom container builds** for SageMaker jobs
+
+### Dependency Management
+- Installs consistent package versions from:
+  - **AWS CodeArtifact**
+  - **Public repositories**
+- Guarantees reproducible environments
+
+### Artifact Generation
+- Creates:
+  - Model files
+  - Docker images
+  - Setup scripts
+- Stores results in **Amazon S3**
+
+### Parallel and Distributed Builds
+- Run multiple builds simultaneously
+- Ideal for training models across **datasets** or **hyperparameter combinations**
+
+### Integration with CI/CD
+- Works with **AWS CodePipeline**
+- Automatically triggers on:
+  - Code commits
+  - New data uploads
+
+### Custom Environment Support
+- Use Docker containers
+- Mirror ML training conditions
+- Guarantees **consistent outcomes**
+
+# AWS CodeDeploy
+
+AWS CodeDeploy is a **deployment automation service** used to roll out applications or ML models to environments such as:
+- **Amazon SageMaker Endpoints**
+- **EC2 instances**
+- **Lambda functions**
+- **Edge devices**
+
+It ensures reliable, consistent, and fully automated model delivery, minimizing disruptions and rollback risks.
+
+## Key Features and Functions
+
+### Automated Model Deployment
+- Moves trained models to:
+  - SageMaker Endpoints
+  - Batch transform jobs
+  - Real-time inference services
+- Integrates with **AWS CodePipeline** for CI/CD workflows
+
+### Deployment Strategies
+- **Blue/Green**: Deploy new version (green) beside old (blue) with full rollback capability
+- **Canary**: Gradually shift traffic to the new version to monitor for issues
+- **Rolling Updates**: Deploy in small chunks to reduce service interruption
+
+### Integration with SageMaker
+- Works with **SageMaker Model Registry**
+- Automatically deploys approved models
+- Tracks model versions and performance
+
+### Monitoring and Rollback
+- Monitors performance via **Amazon CloudWatch**
+- Auto-rollback if:
+  - Inference delay exceeds threshold
+  - Error rate increases
+  - Other custom metrics degrade
+
+# AWS CodePipeline
+
+**AWS CodePipeline** is a managed continuous integration and continuous delivery (CI/CD) service that automates the full lifecycle of machine learning models — from data prep to deployment. It is designed for seamless orchestration of complex ML workflows with zero manual intervention.
+
+## Key Features and Functions
+
+### Automated Workflow Orchestration
+- Handles steps such as:
+  - Data cleaning and feature engineering
+  - Model training, testing, and packaging
+  - Deployment to SageMaker Endpoints or external systems
+
+### Multi-Stage Pipeline Support (Typical ML Stages)
+1. **Source**
+   - Retrieves updated source code or ML model artifacts
+   - Source: GitHub, CodeCommit, S3, etc.
+2. **Build**
+   - Uses AWS CodeBuild to:
+     - Install dependencies
+     - Compile code
+     - Run tests (unit/integration/data checks)
+3. **Training**
+   - Triggers SageMaker Pipelines or Processing Jobs for retraining
+4. **Deployment**
+   - Deploys models using SageMaker Endpoints via AWS CodeDeploy
+
+### Event-Driven Execution
+- Automatically starts pipeline runs based on:
+  - New S3 data arrival
+  - Git push events
+  - Model version updates in SageMaker Model Registry
+
+### Integration with SageMaker Pipelines
+- Manages end-to-end ML processes:
+  - Data prep → training → evaluation → monitoring
+- Maintains dependency order and task sequencing
+
+### Continuous Deployment Strategies
+- Blue/Green
+- Canary
+- Rolling updates
+- Ensures smooth transitions during model updates
+
+### Artifact Management
+- Stores models, logs, and metadata in **Amazon S3**
+- Enables reproducibility for training, testing, and deployment
+
+### Monitoring and Notifications
+- Integrates with:
+  - **Amazon CloudWatch** for real-time metrics
+  - **SNS (Simple Notification Service)** for alerts on failures
+
+# AWS Step Functions for ML Orchestration
+
+**AWS Step Functions** is a fully managed serverless orchestration service that allows developers to coordinate components of ML pipelines for automation, from preprocessing to training, evaluation, deployment, and monitoring.
+
+## Key Features and Functions
+
+### 1. Orchestrating ML Pipeline Steps
+Step Functions supports defining sequential, parallel, and branching workflows for ML tasks:
+
+- Data ingestion and preprocessing
+- Model training and evaluation
+- Model deployment to SageMaker Endpoints
+- Monitoring and retraining triggers
+
+### 2. State Machine Execution
+
+- Workflows are defined using **state machines**.
+- Each step may invoke:
+  - SageMaker Processing Jobs
+  - SageMaker Training Jobs
+  - AWS Lambda functions
+
+Example structure:
+- Start → Preprocessing → Training → Deployment → Monitoring
+
+### 3. Integration with SageMaker and AWS Services
+
+Step Functions integrates with:
+- **Amazon SageMaker** for training and deployment
+- **AWS Lambda** for custom logic
+- **Amazon S3** for data input/output
+- **SNS/SQS** for messaging and human approval
+- **AWS Glue** for data transformations
+
+### 4. Error Handling and Retry Logic
+
+- Built-in **retry policies** and **catch blocks**
+- Graceful fallback to recovery states
+- Configurable retries with backoff
+
+### 5. Visual Workflow Monitoring
+
+- Graphical interface to:
+  - Design and edit workflows
+  - Track execution history
+  - Debug failed states visually
+
+### 6. Human Approval & Manual Interventions
+
+- Supports human-in-the-loop via:
+  - **SNS notifications** (e.g., email alerts)
+  - **SQS queues** (await user response)
+  - **Lambda functions** (manual logic injection)
+
+### 7. Cross-Service Orchestration
+
+- Coordinates across services like:
+  - SageMaker
+  - Lambda
+  - S3
+  - Glue
+  - CloudWatch
+- Enables comprehensive, automated ML lifecycle management
+
+## Summary
+
+| Feature                       | Description                                      |
+|------------------------------|--------------------------------------------------|
+| End-to-End ML Workflow        | Automates entire ML process                      |
+| Built-in Retry & Error Catch  | Resilient and reliable workflow execution        |
+| Visual Interface              | Easy workflow design and debugging               |
+| Human Approval Support        | Manual steps before sensitive actions            |
+| Multi-Service Integration     | Works across multiple AWS services seamlessly    |
+
+## When to Use Step Functions for ML?
+
+Use AWS Step Functions when you need to:
+
+- Automate **multi-step ML workflows**
+- Add **monitoring, retry, and rollback** logic
+- Combine services like SageMaker, Lambda, and S3
+- Implement **CI/CD for ML models**
+- Provide **manual approvals** before deployment
+
