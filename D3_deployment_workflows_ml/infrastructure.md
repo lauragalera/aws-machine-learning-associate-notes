@@ -124,6 +124,15 @@ Allows you to describe AWS resources in **YAML** or **JSON** templates.
 - **Stacks**: Deployed units created from templates
 - **Change Sets**: Preview changes before applying updates to a stack
 
+The `AWS::SageMaker::Model CloudFormation` resource is specifically designed to define an ML model hosted on Amazon SageMaker. It includes configuration details such as:
+
+- Model artifacts - Stored in Amazon S3.
+
+- Inference container - The container image that contains the inference code.
+
+- IAM Role - Permissions to allow SageMaker to access the resources required for hosting.
+
+This resource is the foundation for creating a SageMaker endpoint, as it defines the model that the endpoint will host.
 ### ✅ Pros and ⚠️ Cons
 
 | Pros                                | Cons                                                |
