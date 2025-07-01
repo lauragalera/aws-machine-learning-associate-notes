@@ -8,6 +8,8 @@ Choosing between on-demand and provisioned cloud resources impacts scalability, 
 
 ### On-Demand Resources
 
+On-demand instances guarantee fast provisioning and reliable performance, which are critical for real-time inference.
+
 - **Scalability:**  
   Ideal for unpredictable, spiky workloads. Easily scales during high demand periods.
   
@@ -15,6 +17,8 @@ Choosing between on-demand and provisioned cloud resources impacts scalability, 
   Pay-per-use model (per hour or per second). No upfront costs or long-term commitment.
 
 ### Provisioned (Reserved) Resources
+
+Reserved instances are cost-effective for predictable and steady workloads like scheduled retraining jobs, which occur on a regular schedule.
 
 - **Scalability:**  
   Best for consistent, predictable workloads. Less responsive to sudden spikes.
@@ -123,6 +127,8 @@ Allows you to describe AWS resources in **YAML** or **JSON** templates.
 - **Templates**: Define what infrastructure to create
 - **Stacks**: Deployed units created from templates
 - **Change Sets**: Preview changes before applying updates to a stack
+
+The DependsOn attribute ensures that the specified resource is created only after the specified dependent resource has been successfully created. Otherwise the stack will roll back.
 
 The `AWS::SageMaker::Model CloudFormation` resource is specifically designed to define an ML model hosted on Amazon SageMaker. It includes configuration details such as:
 

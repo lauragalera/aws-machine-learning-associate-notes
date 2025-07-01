@@ -29,6 +29,8 @@ CloudTrail enables full **auditing of user actions**:
 - Records **what action** was taken.
 - Confirms whether **access was permitted or denied**.
 
+ AWS CloudTrail is the best solution to meet the requirement of logging all actions performed on SageMaker resources because it captures detailed API call history and user activity. This comprehensive logging enables compliance auditing and the ability to detect unauthorized or accidental changes. While AWS Config tracks resource configuration changes, it does not provide detailed user activity logs or API call records necessary for auditing user actions. IAM Access Analyzer focuses on policy validation rather than activity logging, and CloudWatch monitors metrics and logs but does not natively capture API-level actions for auditing. Therefore, CloudTrail’s detailed event records and support for insights to detect unusual activity make it the optimal choice. 
+ 
 ### Monitoring Unauthorized Access
 
 - Detect unauthorized attempts to trigger retraining or access data.
