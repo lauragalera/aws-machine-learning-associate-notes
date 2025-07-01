@@ -16,6 +16,10 @@ By using SageMaker Model Registry:
 
 While unique tags can help organize models, SageMaker Model Registry already provides built-in capabilities for versioning and organizing models through **model groups**. Adding tags would add unnecessary complexity and does not add significant benefits over using model groups.
 
+The SageMaker Model Registry is designed to track different versions of a model, including training data, hyperparameters, performance metrics, and other metadata. It helps manage model versions and ensures that important information is centralized and easy to retrieve.
+
+SageMaker Model Registry's model approval status allows you to control which models are approved for deployment. This helps ensure that only trusted and validated models are used in production environments.
+
 ## Ensuring Data Encryption Within SageMaker AI
 
 Encryption is fundamental for protecting sensitive information in the cloud. SageMaker provides multiple built-in mechanisms for data encryption:
@@ -77,6 +81,8 @@ Model performance tends to weaken over time due to changes in the underlying dat
 - Configure alerts to notify you when:
   - Significant deviations from baseline performance occur
   - Input data distribution changes drastically
+
+  SageMaker Model Monitor allows the setup of scheduled jobs to check for deviations in model performance, which is crucial for detecting drift.
 
 **Common Alerts:**
 - **Accuracy Drop:** Warns if model accuracy falls below a threshold.

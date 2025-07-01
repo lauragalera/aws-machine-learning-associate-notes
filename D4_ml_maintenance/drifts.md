@@ -35,6 +35,10 @@ Amazon SageMaker Model Monitor is a service that continuously monitors the quali
 
 A managed service to monitor deployed models in real-time.
 
+Amazon SageMaker Model Monitor automatically detects data drift and other anomalies in model inputs and outputs, enabling automated triggering of retraining workflows. This approach maintains model accuracy and reliability without manual intervention.
+
+To monitor model quality, it is necessary to create baseline statistics from the training data, enable data capture, and compare predictions to actual outcomes using SageMaker Model Monitor.
+
 ### Key Features
 - **Data Quality Monitoring**: Detects feature distribution drift.
 - **Model Performance Monitoring**: Tracks prediction accuracy and other metrics.

@@ -119,6 +119,8 @@ The **SageMaker Inference Recommender** helps choose the best instance type for 
 
 **AWS Compute Optimizer** analyzes resource utilization and recommends right-sizing of instances to reduce costs and maintain performance.
 
+AWS Compute Optimizer is the best choice because it automatically analyzes resource utilization metrics across EC2 instances, ECS clusters, and EBS volumes, providing actionable recommendations to optimize costs with minimal development effort. Unlike AWS Cost Explorer or AWS Trusted Advisor, which focus on cost visualization and general best practices respectively, Compute Optimizer delivers precise, data-driven insights specifically for compute resource optimization.
+
 ### Key Features
 - Analyzes **CPU, memory, storage, and network** usage.
 - Recommends better EC2 instance types for given workloads.

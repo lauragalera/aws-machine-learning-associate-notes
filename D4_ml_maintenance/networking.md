@@ -21,6 +21,8 @@ You define:
 
 When both the data and the instances are located within the same AZ, the network communication occurs over the high-speed, low-latency infrastructure specific to that AZ, eliminating the additional latency and potential data transfer costs associated with cross-AZ communication. This proximity ensures that the training instances can access the data more quickly and efficiently, which is critical for distributed training where timely synchronization between instances significantly impacts overall performance.
 
+Deploying multiple SageMaker endpoints within a single VPC allows for strong network isolation and centralized security management. Using VPC endpoint policies provides fine-grained access control, while network isolation and encryption enhance security. Amazon CloudWatch enables effective monitoring and alerting, supporting scalability and operational health.
+
 ### Subnets
 
 Subnets divide your VPC into smaller segments based on the traffic and security requirements of different ML components.
