@@ -1,109 +1,111 @@
-# Network Access Controls
 
-Network access controls are essential for securing machine learning (ML) infrastructure. By isolating resources and managing data flow, you can prevent unauthorized access and protect sensitive systems.
+# 4.4 Networking for Machine Learning on AWS
 
-## Configuring VPCs, Subnets, and Security Groups
+- [4.4.1 VPCs and Subnets](#441-vpcs-and-subnets)
+- [4.4.2 Security Groups and NACLs](#442-security-groups-and-nacls)
+- [4.4.3 Internet Access and VPC Endpoints](#443-internet-access-and-vpc-endpoints)
+- [4.4.4 Private IPs and Internal Communication](#444-private-ips-and-internal-communication)
+- [4.4.5 Secure Communications](#445-secure-communications)
+
+---
+
+## 4.4.1 VPCs and Subnets
 
 ### Virtual Private Cloud (VPC)
-
-An AWS **Virtual Private Cloud (VPC)** lets you create a separate, private network within AWS. You can launch ML infrastructure within this network to protect it from external threats.
-
-**VPC Benefits**:
-- Provides a secure, isolated environment for ML systems
-- Enables private communication between resources within the VPC
-- Supports hybrid cloud integrations (VPN, Direct Connect, AWS Transit Gateway)
+An AWS VPC creates a private, isolated network for ML infrastructure. Benefits:
+- Secure environment for ML systems
+- Private communication between resources
+- Hybrid cloud support (VPN, Direct Connect, Transit Gateway)
 
 You define:
 - IP address range
 - Subnets
 - Route tables
-- Gateways (e.g., Internet Gateway, NAT Gateway)
+- Gateways (Internet Gateway, NAT Gateway)
 
-When both the data and the instances are located within the same AZ, the network communication occurs over the high-speed, low-latency infrastructure specific to that AZ, eliminating the additional latency and potential data transfer costs associated with cross-AZ communication. This proximity ensures that the training instances can access the data more quickly and efficiently, which is critical for distributed training where timely synchronization between instances significantly impacts overall performance.
+**AZ Proximity:** Locating data and instances in the same Availability Zone (AZ) ensures low-latency, high-speed access—critical for distributed training.
 
-Deploying multiple SageMaker endpoints within a single VPC allows for strong network isolation and centralized security management. Using VPC endpoint policies provides fine-grained access control, while network isolation and encryption enhance security. Amazon CloudWatch enables effective monitoring and alerting, supporting scalability and operational health.
+**Endpoint Isolation:** Deploying multiple SageMaker endpoints in a VPC enables strong isolation and centralized security. Use VPC endpoint policies for fine-grained access control. Monitor with CloudWatch.
 
 ### Subnets
+Subnets segment your VPC for different ML components:
+- **Private Subnets:** Databases, training jobs, backend services (no direct internet)
+- **Public Subnets:** Endpoints, load balancers (internet-facing)
 
-Subnets divide your VPC into smaller segments based on the traffic and security requirements of different ML components.
+Access control:
+- Security Groups
+- Network Access Control Lists (NACLs)
 
-- **Private Subnets**: Used for resources like databases, training jobs, and backend services that shouldn't have direct internet access.
-- **Public Subnets**: Host services that need to communicate with the internet, such as SageMaker endpoints or load balancers.
+---
 
-Access is controlled through:
-- **Security Groups**
-- **Network Access Control Lists (NACLs)**
+## 4.4.2 Security Groups and NACLs
 
 ### Security Groups
+Virtual firewalls for EC2 and SageMaker resources.
+- **Stateful:** Responses to allowed inbound traffic are allowed out
+- **Rule-based:** Inbound/outbound rules by IP, protocol, port
 
-Security groups function as virtual firewalls for Amazon EC2 and SageMaker resources.
+**Best Practices:**
+- Allow only trusted IPs, VPCs, or security groups
+- Regularly review/update rules
+- Deny broad internet access by default
 
-**Key Characteristics**:
-- **Stateful**: Responses to allowed inbound traffic are automatically allowed back out.
-- **Rule-based**: Define inbound and outbound rules based on IP, protocol, and port.
-
-**Best Practices**:
-- Allow access only from trusted IPs, VPCs, or other security groups.
-- Regularly review and update rules.
-- Deny broad internet access by default.
-
-**Example**: A SageMaker notebook in a private subnet may only accept traffic from other VPC resources, with no internet exposure.
+**Example:** SageMaker notebook in a private subnet only accepts traffic from VPC resources, not the internet.
 
 ### Network Access Control Lists (NACLs)
+Stateless, subnet-level security layer.
+- Separate inbound/outbound rules
+- Useful for broad traffic control
 
-NACLs offer a stateless, subnet-level layer of security.
+**Best Practices:**
+- Use NACLs with security groups
+- Restrict unnecessary traffic
+- Deny suspicious/unknown IP ranges
 
-- Define separate **inbound** and **outbound** rules.
-- Useful for broader traffic control in and out of subnets.
+---
 
-**Best Practices**:
-- Use NACLs in conjunction with security groups.
-- Restrict unnecessary traffic.
-- Apply deny rules for suspicious or unknown IP ranges.
+## 4.4.3 Internet Access and VPC Endpoints
 
-## Controlling Internet Access and Private IPs
+### Internet Gateway (IGW)
+- Provides internet access to public subnets
+- Must be attached to VPC and linked via route tables
 
-Securing ML systems also requires managing internet access and ensuring internal communication happens privately.
+### Private Subnets
+- No direct internet access
+- Use NAT Gateway/Instance for outbound-only internet (e.g., updates)
 
-### Internet Access
+### Public Subnets
+- Directly exposed to internet
+- Typically have public IPs
 
-**Internet Gateway (IGW)**:
-- Provides internet access to resources in public subnets.
-- Must be attached to the VPC and linked via route tables.
+### VPC Endpoints
+- Private access to AWS services (S3, SageMaker, DynamoDB)
+- Traffic stays within AWS network
 
-**Private Subnets**:
-- No direct internet access.
-- Use a **NAT Gateway** or **NAT Instance** for outbound-only internet access (e.g., software updates).
+**Best Practice:** Use VPC endpoints to reduce attack surface and data transfer costs
 
-**Public Subnets**:
-- Directly exposed to the internet.
-- Typically include public IP addresses.
+---
 
-**VPC Endpoints**:
-- Allow private access to AWS services like S3, SageMaker, and DynamoDB.
-- Traffic stays within the AWS network and avoids public exposure.
+## 4.4.4 Private IPs and Internal Communication
 
-**Best Practice**:
-- Use VPC endpoints to reduce attack surface and data transfer costs.
+### Private IPs
+- Assigned to VPC resources (EC2, RDS, SageMaker)
+- Keeps internal traffic private
 
-## Private IPs for Secure Internal Communication
+### Internal Load Balancers
+- Use private IPs for secure routing between services
 
-**Private IPs**:
-- Assigned to VPC resources (EC2, RDS, SageMaker, etc.)
-- Ensure internal traffic remains inside the private network
+### PrivateLink
+- Private VPC-to-VPC communication across accounts/regions (no public internet)
 
-**Internal Load Balancers**:
-- Use private IPs to route traffic securely between internal services
+---
 
-**PrivateLink**:
-- Allows private VPC-to-VPC communication across accounts or regions without using the public internet
+## 4.4.5 Secure Communications
 
-## Secure Communications
+### SSL/TLS Encryption
+- Always encrypt communication with ML endpoints (e.g., SageMaker HTTPS)
+- Ensures confidentiality of requests/responses
 
-**SSL/TLS Encryption**:
-- Always encrypt communication with ML endpoints (e.g., SageMaker HTTPS endpoints)
-- Ensures request/response data remains confidential
-
-**VPC Peering**:
-- Creates a private connection between two VPCs (same or different accounts/regions)
-- No traffic goes over the public internet
+### VPC Peering
+- Private connection between two VPCs (same/different accounts/regions)
+- No traffic over public internet
