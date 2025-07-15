@@ -1,5 +1,5 @@
 
-# AWS Machine Learning Associate Notes
+# AWS Machine Learning Engineer Associate Notes
 
 I passed the **AWS Certified Machine Learning Engineer Associate** on July 4th 2025  and created these notes during my study journey.
 
