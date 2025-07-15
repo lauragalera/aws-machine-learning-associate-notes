@@ -44,21 +44,46 @@ I hope they help you prepare and succeed! 😊
 - [4.5 ML Infrastructure Performance & Cost Optimization](D4_ml_maintenance/4.5_infra_and_costs.md)
 - [4.6 SageMaker Security, Monitoring, and Optimization](D4_ml_maintenance/4.6_sagemaker.md)
 
-### Additional Information
+### Additional
 - [AWS ML Exam Extras](extras.md)
 
 ## 💡 FAQs
 
-### Is it difficult?
-The exam is moderately challenging, especially if you’re new to AWS ML services like SageMaker, Glue, and S3. You’ll need a solid grasp of ML concepts, AWS integrations, and best practices for deployment and monitoring.
+### ❓ What is this cert really about?
 
-### Should this be your first AWS certification?
-It can be, but starting with the **AWS Solutions Architect – Associate** or **AWS Certified Cloud Practitioner** is helpful for foundational AWS knowledge.
+- 70%: Deep dive into Amazon SageMaker and its thoushand features.
 
-### How long does preparation take?
-It depends on your background. If you’re already working with AWS ML, focus on practice exams and reviewing key concepts. For most, 40–60 hours of study is typical.
+- 20%: Other AWS services, mostly focused on AI, monitoring and data flow.
 
-## 📚 Additional Resources
-- [AWS Certified Machine Learning Specialty – Official Guide](https://aws.amazon.com/certification/certified-machine-learning-specialty/)
-- [AWS Machine Learning Specialty Practice Exams](https://www.udemy.com/course/aws-certified-machine-learning-specialty-practice-exams/)
-- [AWS Machine Learning Specialty – Hands On!](https://www.udemy.com/course/aws-machine-learning-specialty-hands-on/)
+- 10%: Basic concepts about ML (classification, regression, overfitting, evaluation metrics, plots, etc).
+
+
+### 🔁 What overlaps with other certs?
+I found overlap with the Data Engineer Associate, especially around S3, Kinesis, and Glue. Also, If you’re already familiar with compute services like Lambda or ECS, you’ll feel more comfortable navigating the SageMaker integrations and deployments.
+
+### 🤔 Should this be your first AWS cert?
+
+Even if you're a data scientist or working in a similar role, I wouldn't recommend this as your first AWS certification. 
+
+You’ll need a solid understanding of multiple services to truly grasp how to build end-to-end ML solutions on AWS. If you're just starting out, I’d suggest beginning with the AWS Certified AI Practitioner.
+
+
+### ⏱ Prep time:
+
+What helped me the most this time was what I learned during the Master’s degree, the Tutorials Dojo Study Guide, and the official AWS SageMaker documentation.
+
+Most of my preparation time was spent on practice exams, carefully reviewing missed questions, and creating my own summarized notes. In total, I spent around 40 hours.
+
+### 📚 Resources I used
+
+- [Tutorials Dojo – Machine Learning Associate eBook](https://portal.tutorialsdojo.com/product/study-guide-ebook-aws-certified-machine-learning-engineer-associate-mla-c01/)
+
+- [Nikolai Schuler – ML Associate Practice Exams (Udemy)](https://www.udemy.com/course/aws-machine-learning-engineer-associate-practice-exams/?couponCode=MT150725B)
+
+- [Stéphane Maarek – ML Associate Practice Exams (Udemy)](https://www.udemy.com/course/practice-exams-aws-certified-solutions-architect-associate/?couponCode=MT150725B)
+
+- [Marlon Anesi – ML Associate Practice Exams (Udemy)](https://www.udemy.com/course/practice-exams-aws-certified-machine-learning-mla-c01/?couponCode=MT150725B)
+
+👀 𝗧𝗵𝗶𝗻𝗸 𝘆𝗼𝘂 𝗰𝗼𝘂𝗹𝗱 𝗽𝗮𝘀𝘀 𝘁𝗵𝗲 𝗲𝘅𝗮𝗺?
+
+ Tutorials Dojo offers a free sampler with [20 practice questions](https://portal.tutorialsdojo.com/courses/free-aws-certified-machine-learning-engineer-associate-practice-exams-mla-c01-sampler/)
